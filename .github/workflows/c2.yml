@@ -5,16 +5,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Copiar ENV o revisar si existe
+    - name: Copiar ENV
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Ver si composer esta instalado
       run: which composer
     - name: Instalar dependencias (PHP Vendor)
-      working-directory: ./touristApp/
+      working-directory: ./Senasag/
       run: composer install
     - name: Generar llaves
-      working-directory: ./touristApp/
+      working-directory: ./Senasag/
       run: php artisan key:generate
     - name: Ejecutar test con PHPUnit
-      working-directory: ./touristApp/
+      working-directory: ./Senasag/
       run: vendor/bin/phpunit
