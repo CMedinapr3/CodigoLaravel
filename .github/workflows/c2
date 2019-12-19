@@ -1,0 +1,17 @@
+name: Empaquetamiento
+on: [push]
+jobs:
+  laravel-ContTest:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Copiar ENV o revisar si existe
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: npm
+      working-directory: ./Senasag/
+      run: npm install
+    - name: Compilar
+      working-directory: ./Senasag/
+      run: sudo npm install -g node-sass
+    - name: Empaquetar back-end y front-end
+      run: node-sass ./resources/sass/ -o ./resources/css
